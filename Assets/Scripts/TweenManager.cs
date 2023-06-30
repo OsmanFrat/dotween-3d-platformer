@@ -7,6 +7,8 @@ public class TweenManager : MonoBehaviour
     // Second floor obstacles
     public Transform[] sidePushesRight;
     public Transform[] sidePushesLeft;
+    public Transform[] hammerRight;
+    public Transform[] hammerLeft;
     public Ease elevatorEase;
     void Start()
     {
@@ -16,6 +18,7 @@ public class TweenManager : MonoBehaviour
         ElevatorLeft();
         ElevatorRight();
         SidePush();
+        HammerRotate();
     }
 
     // First floor functions for obstacles
@@ -29,8 +32,8 @@ public class TweenManager : MonoBehaviour
 
     public void ElevatorLeft()
     {
-        elevator_left.DOScale(new Vector3(2.3f,8.5f,2f), 2.5f)
-        .SetDelay(3)
+        elevator_left.DOScale(new Vector3(2.3f,8.5f,2f), 2f)
+        .SetDelay(1)
         .SetLoops(-1, LoopType.Yoyo)
         .SetEase(elevatorEase);
     }
@@ -39,7 +42,7 @@ public class TweenManager : MonoBehaviour
     {
         // Vector3(44,-22,-35) finish
         // Vector3(44,-24,-35) start
-        elevator_right.DOLocalMoveY(-22f, 2f, false)
+        elevator_right.DOLocalMoveY(-22f, 2.5f, false)
         .SetDelay(1)
         .SetLoops(-1, LoopType.Yoyo)
         .SetEase(elevatorEase);
@@ -64,6 +67,25 @@ public class TweenManager : MonoBehaviour
         }
     }
 
+    public void HammerRotate()
+    {
+        //-90 <--> 90
+
+        foreach (Transform hammer in hammerRight)
+        {
+            hammer.DOLocalRotate(new Vector3(90f, 0f, 0f), 2f, RotateMode.Fast)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetEase(Ease.Unset);
+        }
+
+        foreach (Transform hammer in hammerLeft)
+        {
+            hammer.DOLocalRotate(new Vector3(-90f,0f,0f), 2f, RotateMode.Fast)
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetEase(Ease.Unset);
+        }
+
+    }
 
     //(ctrl + k) + (ctrl + c) = comment lines
     //(ctrl + k) + (ctrl + u) = undo comment lines
