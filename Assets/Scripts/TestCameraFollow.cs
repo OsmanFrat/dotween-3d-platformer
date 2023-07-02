@@ -10,7 +10,6 @@ public class TestCameraFollow : MonoBehaviour
     public float rotationSpeed = 5f;
     private float mouseX;
     private float mouseY;
-    private bool isCursorVisible = false;
 
     private void Start() 
     {
@@ -18,10 +17,6 @@ public class TestCameraFollow : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ToggleCursor();
-        }
 
         mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
 
@@ -31,27 +26,6 @@ public class TestCameraFollow : MonoBehaviour
         transform.position = smoothedPosition;
 
         transform.LookAt(target);
-    }
-
-    private void ToggleCursor()
-    {
-        isCursorVisible = !isCursorVisible;
-
-        if (isCursorVisible)
-        {
-            ShowCursor();
-        }
-        
-        else
-        {
-            HideCursor();
-        }
-    }
-
-    private void ShowCursor()
-    {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     private void HideCursor()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class TestMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -36,6 +37,13 @@ public class TestMovement : MonoBehaviour
         }
         rb.velocity = new Vector3(moveDirection.x * speed, rb.velocity.y, moveDirection.z * speed);
 
+        // Rotate character based on camera direction
+        if (moveDirection != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, 10f * Time.deltaTime);
+        }
+
         // Jumping
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -51,8 +59,7 @@ public class TestMovement : MonoBehaviour
         {
             isGrounded = true;
         }
-
-        else if(collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag("Obstacle"))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
