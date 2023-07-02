@@ -1,5 +1,7 @@
 # dotween-3d-platformer
+
 All the obstacles in this game are animated with dotween.
+Play link: https://osmanfrat.itch.io/red-pill-advanture
 
 https://github.com/OsmanFrat/dotween-3d-platformer-game/assets/69113898/d47e47be-1846-4c7e-b501-540a5a9de70c
 
